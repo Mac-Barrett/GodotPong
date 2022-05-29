@@ -11,12 +11,12 @@ config_version=4
 [application]
 
 config/name="PongPong"
-run/main_scene="res://Scenes/Game.tscn"
+run/main_scene="res://Scenes/MainMenu.tscn"
 
 [display]
 
-window/size/width=400
-window/size/fullscreen=true
+window/size/width=600
+window/size/resizable=false
 
 [physics]
 

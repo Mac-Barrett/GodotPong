@@ -1,0 +1,8 @@
+/Users/macbarrett/GodotProjects/PongPong/.mono/temp/bin/Debug/PongPong.dll
+/Users/macbarrett/GodotProjects/PongPong/.mono/temp/bin/Debug/PongPong.pdb
+/Users/macbarrett/GodotProjects/PongPong/.mono/temp/obj/Debug/PongPong.csproj.AssemblyReference.cache
+/Users/macbarrett/GodotProjects/PongPong/.mono/temp/obj/Debug/PongPong.AssemblyInfoInputs.cache
+/Users/macbarrett/GodotProjects/PongPong/.mono/temp/obj/Debug/PongPong.AssemblyInfo.cs
+/Users/macbarrett/GodotProjects/PongPong/.mono/temp/obj/Debug/PongPong.csproj.CoreCompileInputs.cache
+/Users/macbarrett/GodotProjects/PongPong/.mono/temp/obj/Debug/PongPong.dll
+/Users/macbarrett/GodotProjects/PongPong/.mono/temp/obj/Debug/PongPong.pdb
