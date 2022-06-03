@@ -17,19 +17,14 @@ public class Game : Node2D
     Label lbl_p2score;
 
     const int POINTS_TO_WIN = 5;
+    static bool isTwoPlayer;
 
     public override void _Ready()
     {
+        GD.Print(isTwoPlayer);
         lbl_p1score = GetNode<Label>($"{HUD_PATH}p1score");
         lbl_p2score = GetNode<Label>($"{HUD_PATH}p2score");
-    }
 
-    /* Called by MainMenu while being initialized
-     * Sets p1 paddle on left, and spawns and sets up p2 paddle as either
-     * a CPU or player depending on what was inputted on the menu
-     */
-    public void initGameMode(bool twoplayer)
-    {
         ball = GetNode<Ball>("Ball");
 
         p1 = GetNode<Player>("Player1");
@@ -37,7 +32,7 @@ public class Game : Node2D
         p1cast.BindInputKeys((int)KeyList.W, (int)KeyList.S);
         p1.startPos = new Vector2(60, (vpSize / 2) - (p1.paddleHeight / 2));
 
-        if (twoplayer)
+        if (isTwoPlayer)
         {
             p2 =
                 ResourceLoader.Load<PackedScene>("res://Objects/Player.tscn")
@@ -58,6 +53,11 @@ public class Game : Node2D
         p2.startPos = new Vector2(vpSize - 60, (vpSize / 2) - (p1.paddleHeight / 2));
 
         ResetPlayerPos();
+    }
+
+    public void initGameMode(bool twoplayer)
+    {
+        isTwoPlayer = twoplayer;
     }
 
     public override void _PhysicsProcess(float delta)

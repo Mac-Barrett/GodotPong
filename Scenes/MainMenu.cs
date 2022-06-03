@@ -23,12 +23,11 @@ public class MainMenu : ColorRect
             ResourceLoader.Load<PackedScene>("res://Scenes/Game.tscn")
             .Instance<Game>();
 
-        // Edit & Re-pack scene
+        // Edit & and instantiate scene
+        GD.Print(mode);
         game.initGameMode(mode);
         PackedScene gameps = new PackedScene();
         gameps.Pack(game);
-
-        // Change scene
         GetTree().ChangeSceneTo(gameps);
     }
 }

@@ -17,7 +17,6 @@ public class GameOver : CenterContainer
 
     private void _on_Play_Again_pressed()
     {
-        GD.Print("HERE");
         GetTree().Paused = false;
         GetTree().CurrentScene.RemoveChild(this);
     }
@@ -25,7 +24,7 @@ public class GameOver : CenterContainer
 
     private void _on_Main_Menu_pressed()
     {
-        GD.Print("HERE");
+        GetTree().Paused = false;
         GetTree().ChangeScene("res://Scenes/MainMenu.tscn");
     }
 
