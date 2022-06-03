@@ -26,15 +26,15 @@ public class CPU : Paddle
 
     private void MatchBallPosition()
     {
-        if (ball.Position.y > topEdge + 5)
+        if (ball.Position.y > topEdge + 10)
         {
-            Position = new Vector2(Position.x, Position.y + 5);
+            Position = new Vector2(Position.x, Position.y + (Speed / 3));
             if (Position.y >= vpSize - paddleHeight)
                 Position = new Vector2(Position.x, vpSize - paddleHeight);
         }
         else if (ball.Position.y < bottomEdge - 5)
         {
-            Position = new Vector2(Position.x, Position.y - 5);
+            Position = new Vector2(Position.x, Position.y - (Speed / 3));
             if (Position.y <= 0)
                 Position = new Vector2(Position.x, 0);
         }

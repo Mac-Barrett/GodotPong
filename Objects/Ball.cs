@@ -6,8 +6,8 @@ public class Ball : Area2D
     const int ballSize = 0;
     const int vpSize = 600;
 
-    const float baseSpeed = 100;
-    private float currSpeed = baseSpeed;
+    public float baseSpeed { get; set; } = 100;
+    float currSpeed;
     const float speedInc = 10;
     const float maxSpeed = 500;
 
@@ -19,6 +19,7 @@ public class Ball : Area2D
 
     public override void _Ready()
     {
+        currSpeed = baseSpeed;
         Velocity = new Vector2(
             GetRandomDirection() * baseSpeed,
             GetRandomDirection() * baseSpeed);

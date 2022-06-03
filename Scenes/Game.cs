@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using main;
 
 public class Game : Node2D
@@ -17,7 +18,11 @@ public class Game : Node2D
     Label lbl_p2score;
 
     const int POINTS_TO_WIN = 5;
+
     static bool isTwoPlayer;
+    static bool isFatMode;
+    static bool isFastBallMode;
+    static bool isCPUHardMode;
 
     public override void _Ready()
     {
@@ -26,38 +31,56 @@ public class Game : Node2D
         lbl_p2score = GetNode<Label>($"{HUD_PATH}p2score");
 
         ball = GetNode<Ball>("Ball");
+        if (isFastBallMode)
+            ball.baseSpeed = 200;
 
-        p1 = GetNode<Player>("Player1");
-        Player p1cast = p1 as Player;
-        p1cast.BindInputKeys((int)KeyList.W, (int)KeyList.S);
-        p1.startPos = new Vector2(60, (vpSize / 2) - (p1.paddleHeight / 2));
-
-        if (isTwoPlayer)
+        InitPlayer2();
+        
+        if (isFatMode)
         {
-            p2 =
-                ResourceLoader.Load<PackedScene>("res://Objects/Player.tscn")
-                .Instance<Paddle>();
-            AddChild(p2);
-            Player p2cast = p2 as Player;
-            p2cast.BindInputKeys((int)KeyList.Up, (int)KeyList.Down);
+            p1.SetFatPaddle();
+            p2.SetFatPaddle();
         }
-        else
-        {
-            p2 =
-                ResourceLoader.Load<PackedScene>("res://Objects/CPU.tscn")
-                .Instance<Paddle>();
-            AddChild(p2);
-            CPU p2cast = p2 as CPU;
-            p2cast.setBall(ball);
-        }
-        p2.startPos = new Vector2(vpSize - 60, (vpSize / 2) - (p1.paddleHeight / 2));
 
-        ResetPlayerPos();
+        void InitPlayer2()
+        {
+            p1 = GetNode<Player>("Player1");
+            Player p1cast = p1 as Player;
+            p1cast.BindInputKeys((int)KeyList.W, (int)KeyList.S);
+            p1.startPos = new Vector2(60, (vpSize / 2) - (p1.paddleHeight / 2));
+
+            if (isTwoPlayer)
+            {
+                p2 =
+                    ResourceLoader.Load<PackedScene>("res://Objects/Player.tscn")
+                    .Instance<Paddle>();
+                AddChild(p2);
+                Player p2cast = p2 as Player;
+                p2cast.BindInputKeys((int)KeyList.Up, (int)KeyList.Down);
+            }
+            else
+            {
+                p2 =
+                    ResourceLoader.Load<PackedScene>("res://Objects/CPU.tscn")
+                    .Instance<Paddle>();
+                AddChild(p2);
+                if (isCPUHardMode)
+                    p2.Speed = p2.Speed * 2;
+                CPU p2cast = p2 as CPU;
+                p2cast.setBall(ball);
+            }
+            p2.startPos = new Vector2(vpSize - 60, (vpSize / 2) - (p1.paddleHeight / 2));
+
+            ResetPlayerPos();
+        }
     }
 
-    public void initGameMode(bool twoplayer)
+    public void initGameModes(BitArray modes)
     {
-        isTwoPlayer = twoplayer;
+        isTwoPlayer     = modes.Get(0);
+        isFatMode       = modes.Get(1);
+        isFastBallMode  = modes.Get(2);
+        isCPUHardMode   = modes.Get(3);
     }
 
     public override void _PhysicsProcess(float delta)
