@@ -1,8 +1,11 @@
 # GodotPong
 
 Simple Pong Clone I made using C# and the Godot Game engine as a learning tool for C#.
-Plan to add several features in the form of game modes:
+Contains several game modes and features:
 
-- Fat Paddles
-- Faster initial ball speed
-- Chaos Mode: ball bouncing off of walls & paddles randomizes the launch angle to a certain extent
+- Player vs CPU & Player vs Player
+- Fat Paddle Mode
+- Faster Ball Speed Mode
+- CPU Hard Mode
+
+Next change will be to bounce physics on paddles so the angle changes depending on where on the paddle the ball hit.
